@@ -1,0 +1,115 @@
+[
+  {
+    "title": "Tiny World Safari",
+    "description": "Discover the miniature world of insects living in your garden or park.",
+    "category": "insects",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "garden",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Get down low — crouch or sit near a patch of ground or a garden bed",
+      "Watch one small area for 3 minutes without moving — count how many insects you see",
+      "Follow one insect for a minute — where is it going and what is it doing?",
+      "Look under a leaf or on a flower — tiny insects often hide in these spots"
+    ],
+    "observationTips": [
+      "Insects are most active on warm, sunny days",
+      "Check flowers, especially white and yellow ones — they attract many pollinators",
+      "Look at the edges of leaves for tiny caterpillars or aphids"
+    ],
+    "natureFacts": [
+      "There are approximately 10 quintillion insects alive on Earth at any given time",
+      "Ants can carry objects 10 to 50 times their own body weight",
+      "Bees see in ultraviolet light, which reveals hidden patterns on flower petals"
+    ],
+    "reflectionQuestion": "How did slowing down and looking closely change what you noticed?",
+    "safetyReminder": "Observe insects from a safe distance. Do not touch or handle unknown insects — some can sting or bite."
+  },
+  {
+    "title": "Pollinator Patrol",
+    "description": "Track the bees, butterflies, and other pollinators visiting flowers near you.",
+    "category": "insects",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "garden",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find a flowering plant or group of flowers",
+      "Watch for 5 minutes and count how many different pollinators visit",
+      "Notice the difference between bees (fuzzy, purposeful) and flies (smooth, hovering)",
+      "If you see a butterfly, note its color and wing pattern",
+      "Watch how a bee collects pollen — can you see pollen on its legs?"
+    ],
+    "observationTips": [
+      "Warm sunny midday hours are peak pollinator activity",
+      "Lavender, sunflowers, and wildflowers are pollinator magnets",
+      "Hoverflies mimic bees and wasps but cannot sting"
+    ],
+    "natureFacts": [
+      "One-third of all food humans eat depends on pollination by insects",
+      "A honeybee visits 50 to 1000 flowers in a single foraging trip",
+      "Butterflies taste with their feet to find the right plants for their eggs"
+    ],
+    "reflectionQuestion": "What would your world look like without pollinators?"
+  },
+  {
+    "title": "Ant Trail Detective",
+    "description": "Follow ant trails and discover how these tiny engineers organize their world.",
+    "category": "insects",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "neighborhood",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Find a line of ants moving in a trail",
+      "Follow the trail in both directions — where does it start and end?",
+      "Watch two ants meet — do they touch antennae? This is how they communicate",
+      "See if any ants are carrying food — notice what they have chosen to carry",
+      "Place a small stick gently across the trail and watch how the ants respond"
+    ],
+    "observationTips": [
+      "Ant trails are most visible on pavement, walls, and tree trunks",
+      "Different ant species vary greatly in size — from tiny sugar ants to large carpenter ants",
+      "Ants follow chemical trails called pheromones left by other ants"
+    ],
+    "natureFacts": [
+      "Ants have been farming (growing fungus for food) for over 50 million years",
+      "Some ant colonies can contain over 300 million individuals",
+      "The total weight of all ants on Earth is estimated to be close to the total weight of all humans"
+    ],
+    "reflectionQuestion": "What can we learn from how ants work together?"
+  },
+  {
+    "title": "Spider Web Architect",
+    "description": "Find and appreciate the engineering marvel of spider webs.",
+    "category": "insects",
+    "duration": 15,
+    "difficulty": "intermediate",
+    "environment": "garden",
+    "mood": "mindful",
+    "equipment": [],
+    "tasks": [
+      "Search for a spider web — check corners, fences, bushes, and window frames",
+      "Observe the web's structure — is it an orb (circular), a sheet, or a tangled web?",
+      "Look for the spider — it may be in the center, at the edge, or hiding nearby",
+      "Notice how the web catches light — especially effective with morning dew",
+      "Watch the web for a minute — does the spider respond to vibrations?"
+    ],
+    "observationTips": [
+      "Early morning is the best time to spot webs — dew makes them visible",
+      "Look at eye level between plants, and in the corners of structures",
+      "Different spider families build very different web types"
+    ],
+    "natureFacts": [
+      "Spider silk is stronger than steel of the same thickness and more elastic than nylon",
+      "An orb-weaving spider can build a complete web in under an hour",
+      "Most spiders rebuild their webs every day, often eating the old web to recycle the silk protein"
+    ],
+    "reflectionQuestion": "What does the intricacy of a spider web tell you about nature's engineering?",
+    "safetyReminder": "Do not touch spider webs or spiders. Observe from a safe distance."
+  }
+]

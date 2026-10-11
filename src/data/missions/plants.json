@@ -1,0 +1,143 @@
+[
+  {
+    "title": "Leaf Shape Explorer",
+    "description": "Discover the incredible diversity of leaf shapes in your surroundings.",
+    "category": "plants",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "garden",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Find five leaves with distinctly different shapes — long, round, pointed, lobed, or heart-shaped",
+      "Gently feel the texture of each leaf — is it smooth, rough, fuzzy, or waxy?",
+      "Hold a leaf up to the sunlight and look at its veins — are they parallel or branching?",
+      "Look for a leaf that has been nibbled by an insect — nature's own artwork"
+    ],
+    "observationTips": [
+      "Compare leaves from the same tree — even on one branch, shapes can vary",
+      "Evergreen and deciduous plants have very different leaf textures",
+      "Some leaves smell distinctive when gently rubbed — try mint family plants"
+    ],
+    "natureFacts": [
+      "Leaves are green because chlorophyll absorbs red and blue light but reflects green",
+      "The world's largest leaf belongs to the raffia palm and can be over 25 meters long",
+      "A single mature oak tree can have over 200,000 leaves"
+    ],
+    "reflectionQuestion": "How many different leaf shapes exist within just a few steps of where you're standing?"
+  },
+  {
+    "title": "Flower Detective",
+    "description": "Investigate the fascinating structures and colors of flowers around you.",
+    "category": "plants",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "garden",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find three flowers of different colors and observe them closely",
+      "Count the petals on each flower — is it 3, 4, 5, or many?",
+      "Look at the center of a flower — can you see the stamens or pistil?",
+      "Notice if any insects are visiting the flowers — they are pollinators at work",
+      "Gently smell each flower from a safe distance — how would you describe the scent?"
+    ],
+    "observationTips": [
+      "Flowers with strong scents often attract bees and butterflies",
+      "White or pale flowers are often pollinated by moths at night",
+      "Look for small flowers growing in cracks or at the base of walls"
+    ],
+    "natureFacts": [
+      "Sunflowers are actually made up of thousands of tiny individual flowers",
+      "Some flowers change color after pollination to signal to insects they are 'done'",
+      "The corpse flower can take 7-10 years to bloom just once"
+    ],
+    "reflectionQuestion": "What color or detail caught your eye that you usually walk past without noticing?",
+    "safetyReminder": "Do not pick wildflowers — they support local ecosystems. Never eat or touch unfamiliar plants."
+  },
+  {
+    "title": "Tree Bark Investigator",
+    "description": "Study the unique textures and patterns of tree bark in your area.",
+    "category": "plants",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "park",
+    "mood": "mindful",
+    "equipment": [],
+    "tasks": [
+      "Find three trees with distinctly different bark textures",
+      "Touch each bark gently — describe the texture (smooth, rough, flaky, ridged, papery)",
+      "Look for any signs of life on the bark: lichens, moss, insects, or small plants",
+      "Estimate the circumference of the largest tree using your arm span",
+      "Look up into the canopy — how does the bark change from base to branches?"
+    ],
+    "observationTips": [
+      "Older trees usually have thicker, more deeply furrowed bark",
+      "Birch trees have distinctive white papery bark",
+      "Look for small holes in bark — they might be made by woodpeckers or beetles"
+    ],
+    "natureFacts": [
+      "Tree bark serves as armor, protecting against disease, insects, fire, and water loss",
+      "Cork comes from the bark of the cork oak tree, which can be harvested without killing the tree",
+      "Some trees shed bark regularly — it's a natural process of growth"
+    ],
+    "reflectionQuestion": "If you could describe one tree's bark to someone who has never touched a tree, what would you say?"
+  },
+  {
+    "title": "Moss and Lichen Safari",
+    "description": "Discover the miniature world of mosses and lichens growing on surfaces around you.",
+    "category": "plants",
+    "duration": 15,
+    "difficulty": "intermediate",
+    "environment": "forest",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Find moss growing on a surface — a rock, a wall, a tree, or the ground",
+      "Look closely at the moss — can you see individual tiny stems and leaves?",
+      "Find a lichen — it may look like a flat, crusty, or leafy patch on a rock or tree",
+      "Notice the difference between moss (soft, green) and lichen (flat, often gray or yellow)",
+      "Check which direction the moss is growing — is there more on one side of a tree?"
+    ],
+    "observationTips": [
+      "Mosses prefer damp, shaded areas",
+      "Lichens are not single organisms — they are a partnership between a fungus and an alga",
+      "The old saying 'moss grows on the north side' is unreliable but fun to test"
+    ],
+    "natureFacts": [
+      "Mosses are among the oldest land plants, dating back over 450 million years",
+      "Lichens are used to monitor air quality — they are very sensitive to pollution",
+      "Some mosses can survive being completely dried out for months, then revive when water returns"
+    ],
+    "reflectionQuestion": "What did you discover by looking at things most people step over?",
+    "safetyReminder": "Do not remove moss or lichen from surfaces — they are living organisms that support local ecosystems."
+  },
+  {
+    "title": "Wildflower Meadow Walk",
+    "description": "Explore a grassy area to discover wild plants and meadow flowers.",
+    "category": "plants",
+    "duration": 30,
+    "difficulty": "intermediate",
+    "environment": "park",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Walk slowly through a grassy area, scanning the ground for small flowers",
+      "Find at least three different wildflowers or flowering weeds",
+      "Notice the variety of grasses — are they tall, short, feathery, or stiff?",
+      "Look for seed heads — dandelion clocks, grass seeds, or dried flower heads",
+      "Sit quietly for five minutes and notice how the plants move in the breeze"
+    ],
+    "observationTips": [
+      "Many 'weeds' are actually beautiful wildflowers — dandelions, clover, and buttercups",
+      "Look at the edges of paths and fences where wildflowers often grow",
+      "Spring and summer offer the most diversity, but autumn has seed heads and fall color"
+    ],
+    "natureFacts": [
+      "A single dandelion flower head is actually composed of up to 200 individual ray flowers",
+      "Clover enriches soil by converting nitrogen from the air into a form plants can use",
+      "Meadow grasses are some of the most important plants on Earth, feeding most of humanity through crops like wheat, rice, and corn"
+    ],
+    "reflectionQuestion": "What beauty did you find in plants that most people call 'weeds'?"
+  }
+]

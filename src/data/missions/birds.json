@@ -1,0 +1,142 @@
+[
+  {
+    "title": "The Five-Minute Bird Detective",
+    "description": "Discover the birds sharing your environment through careful observation and listening.",
+    "category": "birds",
+    "duration": 5,
+    "difficulty": "beginner",
+    "environment": "any",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Find a comfortable place to stand still without disturbing wildlife",
+      "Close your eyes for 30 seconds and count how many distinct bird sounds you hear",
+      "Open your eyes and try to locate one bird — note its size, color, and shape",
+      "Watch the bird's behavior for one minute: is it feeding, singing, or flying?"
+    ],
+    "observationTips": [
+      "Birds are most active in the early morning and late afternoon",
+      "Stay still and quiet — birds will come closer when they feel safe",
+      "Look for movement in trees and bushes before trying to spot birds in the open sky"
+    ],
+    "natureFacts": [
+      "The average songbird's heart beats about 400 times per minute",
+      "Many birds can see ultraviolet light, revealing patterns invisible to humans",
+      "A bird's feathers weigh more than its skeleton"
+    ],
+    "reflectionQuestion": "What did you notice once you stopped looking at your phone and started listening?",
+    "safetyReminder": "Keep a respectful distance from nests and nesting birds."
+  },
+  {
+    "title": "Dawn Chorus Explorer",
+    "description": "Experience the morning symphony of birdsong and learn to distinguish different calls.",
+    "category": "birds",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "park",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Arrive at your spot early — ideally within an hour of sunrise",
+      "Stand or sit quietly and listen to the chorus of sounds around you",
+      "Try to count how many different bird calls you can distinguish",
+      "Pick one call that stands out and try to locate the bird making it",
+      "Describe the call in your own words — is it a whistle, trill, chirp, or warble?"
+    ],
+    "observationTips": [
+      "Dawn chorus is loudest in spring but present year-round",
+      "Try cupping your hands behind your ears to amplify sounds",
+      "Different species sing from different heights — scan from ground to treetops"
+    ],
+    "natureFacts": [
+      "Birds sing at dawn because sound travels further in the cool, still morning air",
+      "Male birds primarily sing to defend territory and attract mates",
+      "Some birds can produce two notes simultaneously using a special organ called a syrinx"
+    ],
+    "reflectionQuestion": "How did immersing yourself in natural sound change the way you experience silence?"
+  },
+  {
+    "title": "Feathered Neighbors",
+    "description": "Map the bird species that live in your immediate neighborhood.",
+    "category": "birds",
+    "duration": 30,
+    "difficulty": "intermediate",
+    "environment": "neighborhood",
+    "mood": "curious",
+    "equipment": ["Notebook or phone for notes"],
+    "tasks": [
+      "Walk slowly through your neighborhood, stopping at three different spots for 5 minutes each",
+      "At each stop, observe and note every bird you see or hear",
+      "Record the approximate size compared to a common bird like a sparrow or pigeon",
+      "Note what each bird is doing — perching, flying, pecking at the ground, bathing",
+      "Look for patterns: do certain birds prefer certain trees, rooftops, or areas?"
+    ],
+    "observationTips": [
+      "Check power lines, fences, and rooftops — these are popular bird perches",
+      "Listen for the sharp 'chip' alarm calls birds make when you walk near",
+      "Look for small flocks moving together through gardens"
+    ],
+    "natureFacts": [
+      "Urban areas often support more bird species than people realize — some cities have over 200 species",
+      "Many birds return to the exact same territory year after year",
+      "Sparrows have lived alongside humans for over 10,000 years"
+    ],
+    "reflectionQuestion": "Were you surprised by how many different birds live near you?"
+  },
+  {
+    "title": "Raptor Watch",
+    "description": "Scan the skies and high perches for birds of prey in your area.",
+    "category": "birds",
+    "duration": 30,
+    "difficulty": "adventurous",
+    "environment": "park",
+    "mood": "curious",
+    "equipment": ["Binoculars if available"],
+    "tasks": [
+      "Find an open area with a wide view of the sky",
+      "Scan the sky slowly for large, soaring birds — look for broad wingspans and circling flight patterns",
+      "Check the tops of tall trees, poles, and buildings for perched raptors",
+      "If you spot one, note its silhouette — broad rounded wings, long narrow wings, or a fan-shaped tail?",
+      "Watch for at least 15 minutes — raptors often appear suddenly"
+    ],
+    "observationTips": [
+      "Raptors use thermals — rising columns of warm air — look for them on sunny days after 10am",
+      "A circling bird high up is often a raptor riding a thermal",
+      "Hawks and falcons are more common in urban areas than most people think"
+    ],
+    "natureFacts": [
+      "Peregrine falcons can dive at speeds exceeding 240 mph, making them the fastest animals on Earth",
+      "Many raptors have vision 4-8 times sharper than humans",
+      "Red-tailed hawks are one of the most widespread raptors in North America"
+    ],
+    "reflectionQuestion": "How did it feel to look up and truly see the sky, rather than just passing under it?"
+  },
+  {
+    "title": "Water Bird Watch",
+    "description": "Visit a pond, lake, or river to observe aquatic and wading birds.",
+    "category": "birds",
+    "duration": 30,
+    "difficulty": "beginner",
+    "environment": "park",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find a spot near water where you can sit quietly",
+      "Count how many types of water birds you can see — ducks, geese, herons, or others",
+      "Watch how different birds interact with water — diving, dabbling, wading, or swimming",
+      "Notice one bird's feet — are they webbed, long-toed, or something else?",
+      "Observe how they take off and land on water"
+    ],
+    "observationTips": [
+      "Early morning is best for water bird watching",
+      "Herons and egrets often stand motionless — look carefully along the shoreline",
+      "Ripples on the water surface can reveal diving birds"
+    ],
+    "natureFacts": [
+      "Ducks have waterproof feathers thanks to an oil gland near their tail",
+      "Great blue herons can strike at fish in less than a tenth of a second",
+      "Many migratory water birds travel thousands of miles between seasons"
+    ],
+    "reflectionQuestion": "What did watching birds at water teach you about patience?"
+  }
+]

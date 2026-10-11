@@ -1,0 +1,15 @@
+services:
+  # WildSense on Render — Web Service Deployment
+  - type: web
+    name: wildsense
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false

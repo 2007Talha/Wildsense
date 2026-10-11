@@ -1,0 +1,115 @@
+[
+  {
+    "title": "Forest Soundscape",
+    "description": "Immerse yourself in the sounds of the forest and map the acoustic environment.",
+    "category": "forests",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "forest",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find a comfortable spot in or near a wooded area",
+      "Close your eyes for two full minutes and just listen",
+      "Identify sounds from three layers: ground level, mid-level, and canopy",
+      "Listen for the wind in the leaves — how does it sound different through different trees?",
+      "Open your eyes and try to match each sound to its source"
+    ],
+    "observationTips": [
+      "Forests have distinct sound layers — insects below, birds above",
+      "Wind through pine needles sounds different from wind through broad leaves",
+      "The best forest soundscapes are heard when there is no wind"
+    ],
+    "natureFacts": [
+      "Trees communicate through underground fungal networks called mycorrhizae",
+      "Old-growth forests can absorb sound, making them some of the quietest places on Earth",
+      "The Japanese practice of 'forest bathing' (shinrin-yoku) has measurable health benefits"
+    ],
+    "reflectionQuestion": "What sounds disappeared once you started really paying attention?"
+  },
+  {
+    "title": "Canopy Observer",
+    "description": "Look up and explore the world in the tree canopy above you.",
+    "category": "forests",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "forest",
+    "mood": "mindful",
+    "equipment": [],
+    "tasks": [
+      "Stand or lie down where you can see the tree canopy clearly",
+      "Notice how much sky is visible through the leaves — this is called canopy cover",
+      "Count how many different tree species you can see from their leaf shapes",
+      "Watch for movement in the canopy — squirrels, birds, or swaying branches",
+      "Notice how light filters through the leaves — look for sun spots on the ground"
+    ],
+    "observationTips": [
+      "The canopy is like a whole separate ecosystem — many creatures never come to the ground",
+      "Looking straight up through trees is called a 'canopy view' and is used in forestry",
+      "Different seasons dramatically change how much light reaches the forest floor"
+    ],
+    "natureFacts": [
+      "Forest canopies can reduce temperatures by 5-10°C compared to open areas",
+      "Tropical forest canopies contain over half of all species on Earth",
+      "Trees in a forest grow taller than isolated trees because they compete for light"
+    ],
+    "reflectionQuestion": "When was the last time you really looked up and appreciated the ceiling nature built?"
+  },
+  {
+    "title": "Decomposition Detective",
+    "description": "Investigate the forest floor and the cycle of decay that feeds new life.",
+    "category": "forests",
+    "duration": 15,
+    "difficulty": "intermediate",
+    "environment": "forest",
+    "mood": "curious",
+    "equipment": [],
+    "tasks": [
+      "Find a patch of forest floor covered in fallen leaves or needles",
+      "Gently move some leaf litter aside — what do you see underneath?",
+      "Look for a rotting log — examine its surface for fungi, moss, or tiny insects",
+      "Find three stages of decomposition: a fresh fallen leaf, a partially decayed one, and dark soil",
+      "Notice the smell — healthy forest soil has a distinctive earthy scent called petrichor"
+    ],
+    "observationTips": [
+      "The forest floor is one of the most biodiverse zones in any ecosystem",
+      "Fungi are the primary decomposers — look for mushrooms and bracket fungi on dead wood",
+      "Earthworms, beetles, and millipedes all help break down organic matter"
+    ],
+    "natureFacts": [
+      "A single teaspoon of forest soil can contain billions of bacteria",
+      "The 'earthy' smell of soil is caused by a compound called geosmin, produced by soil bacteria",
+      "Dead trees (called 'snags') are vital habitat — over 80 species of birds use them"
+    ],
+    "reflectionQuestion": "How does understanding decay change the way you see life?",
+    "safetyReminder": "Do not touch unknown fungi or mushrooms. Some are toxic. Wash your hands after handling soil."
+  },
+  {
+    "title": "Tree Identification Walk",
+    "description": "Learn to identify different tree species using leaves, bark, and shape.",
+    "category": "forests",
+    "duration": 30,
+    "difficulty": "intermediate",
+    "environment": "park",
+    "mood": "curious",
+    "equipment": ["Notebook or phone for notes"],
+    "tasks": [
+      "Choose a path with at least five visible trees of different types",
+      "For each tree, note: overall shape, bark texture, leaf shape, and any fruits or seeds",
+      "Group the trees: needle-leaved (conifers) vs. broad-leaved (deciduous or evergreen)",
+      "Find the tallest tree and the widest tree — are they the same species?",
+      "Look for any tree that is clearly much older than the others — what makes you think so?"
+    ],
+    "observationTips": [
+      "Tree shape (silhouette) is one of the fastest identification clues from a distance",
+      "Oaks have lobed leaves, maples have pointed lobes, and birches have serrated edges",
+      "Seeds and fruits (acorns, samaras, cones) are excellent identification aids"
+    ],
+    "natureFacts": [
+      "The oldest known individual tree is a bristlecone pine over 5,000 years old",
+      "Trees grow from the tips — a carving at eye level on a young tree will be at the same height decades later",
+      "Some trees can 'talk' to each other by releasing chemical signals when attacked by insects"
+    ],
+    "reflectionQuestion": "How well do you actually know the trees you walk past every day?"
+  }
+]

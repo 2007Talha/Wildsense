@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E4D40" />
+      <stop offset="100%" stop-color="#102B24" />
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#EBF4EC" />
+    </linearGradient>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#051410" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Emblem Background -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bgGrad)" stroke="#4A6741" stroke-width="1.5" filter="url(#subtleGlow)" />
+
+  <!-- Botanical Leaf Icon (WildSense Brand Mark) -->
+  <g transform="translate(14, 13)">
+    <!-- Main Leaf Body -->
+    <path 
+      d="M34.5 1.5 C24 1.5, 3.5 12, 1.5 25.5 C0.5 32, 5 36.5, 11 36.5 C24.5 36.5, 35 16, 35 1.5 Z" 
+      fill="url(#leafGrad)" 
+      stroke="#A8BDA0"
+      stroke-width="0.8"
+    />
+    
+    <!-- Central Leaf Vein -->
+    <path 
+      d="M2.5 35.5 C9 29, 21 16, 34 2" 
+      fill="none" 
+      stroke="#183D32" 
+      stroke-width="2.4" 
+      stroke-linecap="round"
+    />
+    
+    <!-- Secondary Branching Leaf Veins -->
+    <path 
+      d="M12 25 C16 23, 20 25, 23 27" 
+      fill="none" 
+      stroke="#183D32" 
+      stroke-width="1.5" 
+      stroke-linecap="round" 
+      opacity="0.85"
+    />
+    <path 
+      d="M19 17 C23 15, 27 17, 30 19" 
+      fill="none" 
+      stroke="#183D32" 
+      stroke-width="1.5" 
+      stroke-linecap="round" 
+      opacity="0.85"
+    />
+    <path 
+      d="M7 31 C9.5 28.5, 12.5 29.5, 14 31" 
+      fill="none" 
+      stroke="#183D32" 
+      stroke-width="1.2" 
+      stroke-linecap="round" 
+      opacity="0.75"
+    />
+
+    <!-- Golden Naturalist Sprout Sparkle -->
+    <circle cx="31.5" cy="4" r="2.2" fill="#E5A96E" />
+  </g>
+</svg>

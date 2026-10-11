@@ -1,0 +1,143 @@
+[
+  {
+    "title": "Five Senses Grounding",
+    "description": "A calming sensory exercise to fully connect with your natural surroundings.",
+    "category": "mindfulness",
+    "duration": 5,
+    "difficulty": "beginner",
+    "environment": "any",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find a quiet outdoor spot and stand or sit comfortably",
+      "Name 5 things you can SEE in nature around you",
+      "Name 4 things you can TOUCH — feel the ground, bark, a leaf, the breeze",
+      "Name 3 things you can HEAR — listen beyond the first obvious sound",
+      "Name 2 things you can SMELL — the air, earth, flowers, rain",
+      "Name 1 thing you can TASTE — the air, a raindrop, or simply notice the taste in your mouth"
+    ],
+    "observationTips": [
+      "This is a grounding technique used in mindfulness and therapy",
+      "Take your time with each sense — there's no rush",
+      "Close your eyes between senses to reset your attention"
+    ],
+    "natureFacts": [
+      "Spending just 20 minutes in nature has been shown to lower cortisol (stress hormone) levels",
+      "The color green has been scientifically shown to reduce stress and improve mood",
+      "Natural sounds activate the parasympathetic nervous system, promoting relaxation"
+    ],
+    "reflectionQuestion": "Which sense revealed something you hadn't noticed before?"
+  },
+  {
+    "title": "Cloud Watching Meditation",
+    "description": "Lie back and watch the sky — let the clouds teach you about letting go.",
+    "category": "mindfulness",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "park",
+    "mood": "calm",
+    "equipment": ["A blanket or towel to lie on"],
+    "tasks": [
+      "Find a safe, open spot where you can see a wide expanse of sky",
+      "Lie down or recline comfortably and look up at the clouds",
+      "Watch one cloud for 3 minutes — notice how it changes shape and moves",
+      "Notice the different layers of clouds — some move fast, some seem still",
+      "Let your thoughts come and go like the clouds — don't hold onto any of them"
+    ],
+    "observationTips": [
+      "Partly cloudy days are ideal — you want some clouds to watch",
+      "Notice the speed and direction of the wind by watching cloud movement",
+      "Cloud shadows on the ground can reveal wind patterns you can't feel"
+    ],
+    "natureFacts": [
+      "Clouds are classified into 10 main types, first categorized by Luke Howard in 1802",
+      "An average cumulus cloud weighs about 500,000 kilograms — held up entirely by rising air",
+      "The highest clouds (noctilucent) form at 80km altitude, near the edge of space"
+    ],
+    "reflectionQuestion": "How did watching something constantly changing make you feel about your own thoughts?"
+  },
+  {
+    "title": "Walking Meditation",
+    "description": "Walk slowly and deliberately through nature, focusing on each step.",
+    "category": "mindfulness",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "park",
+    "mood": "mindful",
+    "equipment": [],
+    "tasks": [
+      "Choose a flat path about 20-30 steps long",
+      "Walk the path very slowly — feel each footstep: heel, sole, toes",
+      "Synchronize your breathing with your steps — inhale for 3 steps, exhale for 3 steps",
+      "Walk the path three times, each time focusing on a different sense: sight, sound, then touch",
+      "End by standing still for one minute, feeling your feet connected to the earth"
+    ],
+    "observationTips": [
+      "This is a traditional Buddhist meditation technique adapted for nature",
+      "Remove shoes for a deeper sensory experience on safe, natural ground",
+      "If your mind wanders, gently bring focus back to your feet"
+    ],
+    "natureFacts": [
+      "Walking barefoot on natural ground (earthing) may help reduce inflammation according to some studies",
+      "Humans evolved to walk 5-10 miles per day — our bodies are built for outdoor movement",
+      "The sound of your own footsteps on different surfaces — gravel, grass, leaves — activates mindfulness"
+    ],
+    "reflectionQuestion": "How does slowing down physically change the speed of your mind?"
+  },
+  {
+    "title": "Sunrise or Sunset Ritual",
+    "description": "Watch a sunrise or sunset from start to finish, fully present.",
+    "category": "mindfulness",
+    "duration": 30,
+    "difficulty": "beginner",
+    "environment": "any",
+    "mood": "calm",
+    "equipment": [],
+    "tasks": [
+      "Find a spot with a clear view of the horizon or an open sky",
+      "Arrive 10 minutes before the event and settle in",
+      "Watch the colors change — name every distinct color you see",
+      "Notice how the light changes the appearance of everything around you",
+      "After it's over, sit in the new light for 5 minutes and notice the shift in mood"
+    ],
+    "observationTips": [
+      "The best colors often appear 10-20 minutes after sunset or before sunrise",
+      "Clouds add drama — a clear sky is beautiful but cloudy sunsets are spectacular",
+      "Look around you — sunsets illuminate the landscape in unique warm tones"
+    ],
+    "natureFacts": [
+      "Sunset colors are caused by sunlight traveling through more atmosphere, scattering shorter wavelengths",
+      "The 'green flash' is a rare optical phenomenon visible at sunset over water in clear conditions",
+      "No two sunsets are ever identical — atmospheric conditions create a unique display every day"
+    ],
+    "reflectionQuestion": "When was the last time you watched a full sunrise or sunset without checking your phone?"
+  },
+  {
+    "title": "Gratitude Garden",
+    "description": "Walk through a natural space and find reasons to be grateful.",
+    "category": "mindfulness",
+    "duration": 15,
+    "difficulty": "beginner",
+    "environment": "garden",
+    "mood": "mindful",
+    "equipment": [],
+    "tasks": [
+      "Walk slowly through a garden, park, or green space",
+      "Find five natural things that you feel grateful for — a tree providing shade, a flower's beauty, fresh air",
+      "For each thing, stop and spend 30 seconds appreciating it",
+      "Think about who or what made each thing possible — rain, soil, sunlight, time",
+      "End by taking three deep breaths and saying one word of gratitude quietly to yourself"
+    ],
+    "observationTips": [
+      "Gratitude practice in nature combines two proven well-being boosters",
+      "Small things count — a patch of soft grass, a gentle breeze, a bird's song",
+      "You can do this anywhere — even a sidewalk tree or a window box"
+    ],
+    "natureFacts": [
+      "Regular gratitude practice has been linked to better sleep, lower anxiety, and increased happiness",
+      "Humans have an innate attraction to nature called 'biophilia' — coined by E.O. Wilson",
+      "Green spaces in cities have been shown to reduce crime, improve mental health, and increase community bonds"
+    ],
+    "reflectionQuestion": "What everyday natural gift do you usually take for granted?"
+  }
+]
