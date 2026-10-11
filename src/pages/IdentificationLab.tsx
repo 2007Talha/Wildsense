@@ -3,8 +3,9 @@ import {
   Camera, Upload, Sparkles, AlertTriangle, ShieldCheck, Check, 
   BookOpen, Info, RefreshCw, ChevronRight, Eye, MessageSquareText, 
   HelpCircle, Send, Leaf, Heart, ArrowRight, CornerDownRight,
-  SearchX, AlertCircle
+  SearchX, AlertCircle, Compass
 } from 'lucide-react';
+
 import { visionService } from '../services/vision/vision-service';
 import { aiRouter } from '../services/ai/ai-router';
 import { useAppStore } from '../store/app-store';
@@ -17,34 +18,47 @@ const SAMPLE_SPECIMENS = [
     category: 'plant',
     icon: '🍂',
     sampleQuery: 'oak',
-    previewUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80',
+    previewUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80',
     description: 'Found on shaded trail floor with sharp pointed lobes.',
+    predictedLabel: 'Northern Red Oak (Quercus rubra)',
+    characteristics: ['Alternate lobed leaves with pointed bristled tips', 'Acorns seated in shallow woody cups', 'Deep furrowed dark bark with vertical ridges'],
+    natureFacts: ['Red oaks can live over 300 years and support over 500 species of native caterpillars and pollinators.', 'Acorns take two full growing seasons on the tree to mature.'],
   },
   {
     name: 'American Robin',
     category: 'bird',
     icon: '🐦',
     sampleQuery: 'robin',
-    previewUrl: 'https://images.unsplash.com/photo-1544943910-4c1dc44a0b38?auto=format&fit=crop&w=400&q=80',
+    previewUrl: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=600&q=80',
     description: 'Rust-breasted songbird foraging on garden lawn.',
+    predictedLabel: 'American Robin (Turdus migratorius)',
+    characteristics: ['Rich brick-red to orange breast plumage', 'Dark charcoal back and white eye crescents', 'Alert upright foraging stance with yellow bill'],
+    natureFacts: ['Robins locate earthworms moving underground through subtle soil acoustics and micro-vibrations.', 'Robin eggs are an iconic pastel cyan blue due to biliverdin pigment.'],
   },
   {
     name: 'Western Honeybee',
     category: 'insect',
     icon: '🐝',
     sampleQuery: 'bee',
-    previewUrl: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=400&q=80',
+    previewUrl: 'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?auto=format&fit=crop&w=600&q=80',
     description: 'Pollinating wild clover blossoms.',
+    predictedLabel: 'Western Honeybee (Apis mellifera)',
+    characteristics: ['Hairy golden-brown thorax and striped abdomen', 'Corbiculae (pollen baskets) on hind legs', 'Two pairs of linked membranous wings'],
+    natureFacts: ['A single honeybee colony visits millions of flowers each season, essential for wildflower biodiversity.', 'Communicate floral coordinate angles via intricate figure-eight "waggle dances".'],
   },
   {
     name: 'Forest Fern',
     category: 'plant',
     icon: '🌿',
     sampleQuery: 'fern',
-    previewUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80',
+    previewUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80',
     description: 'Deep green fronds unrolling near a creek bank.',
+    predictedLabel: 'Woodland Fern (Polypodiopsida)',
+    characteristics: ['Feathery dissected fronds unfurling from fiddleheads', 'Clusters of spore-bearing sori on leaflet undersides', 'Prefers humid, dappled shade and acidic soils'],
+    natureFacts: ['Ferns are ancient vascular plants that predate flowers and seeds by over 200 million years.', 'Reproduce through microscopic spores released into wind currents.'],
   },
 ];
+
 
 const NATURALIST_SUGGESTIONS = [
   "I found a bright blue feather with black bars on a trail",
@@ -74,6 +88,9 @@ export function IdentificationLab() {
   const [manualCategory, setManualCategory] = useState('plant');
   const [manualNotes, setManualNotes] = useState('');
   const [manualFeature, setManualFeature] = useState('');
+  const [isManualAnalyzing, setIsManualAnalyzing] = useState(false);
+  const [manualResult, setManualResult] = useState<IdentificationResult | null>(null);
+  const [manualSavedToJournal, setManualSavedToJournal] = useState(false);
 
   // Ask Naturalist AI state
   const [askQuery, setAskQuery] = useState('');
@@ -96,12 +113,32 @@ export function IdentificationLab() {
   };
 
   const handleSelectSample = async (sample: typeof SAMPLE_SPECIMENS[0]) => {
-    const fakeBlob = new Blob(['sample-nature-specimen'], { type: 'image/jpeg' });
-    const fakeFile = new File([fakeBlob], `${sample.sampleQuery}.jpg`, { type: 'image/jpeg' });
-    setImageFile(fakeFile);
+    setIsAnalyzing(true);
+    setResult(null);
     setImageUrl(sample.previewUrl);
     setAddedToJournal(false);
-    await runIdentification(fakeFile, sample.previewUrl);
+
+    try {
+      await new Promise((r) => setTimeout(r, 450));
+      setResult({
+        id: crypto.randomUUID(),
+        imageUrl: sample.previewUrl,
+        predictedLabel: sample.predictedLabel,
+        confidence: 0.95,
+        category: sample.category,
+        characteristics: sample.characteristics,
+        natureFacts: sample.natureFacts,
+        source: 'model',
+        modelName: 'WildSense Curated Vision Matcher',
+        warning: 'AI field observation — always observe wildlife and plants with care.',
+        createdAt: new Date(),
+        notFound: false,
+      });
+    } catch (err) {
+      console.error('Sample identification failed:', err);
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const runIdentification = async (file: File, url: string) => {
@@ -119,22 +156,79 @@ export function IdentificationLab() {
     }
   };
 
-  const handleManualSubmit = (e: React.FormEvent) => {
+  const handleManualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!manualName.trim()) return;
+    const name = manualName.trim();
+    if (!name) return;
 
-    const characteristics = manualFeature.split(',').map((c) => c.trim()).filter(Boolean);
-    const manualResult = visionService.createManualIdentification({
-      name: manualName.trim(),
-      category: manualCategory,
-      characteristics,
-      notes: manualNotes.trim(),
+    setIsManualAnalyzing(true);
+    setManualResult(null);
+    setManualSavedToJournal(false);
+
+    try {
+      const traitsList = manualFeature.split(',').map((c) => c.trim()).filter(Boolean);
+      const query = `Field observation of a ${manualCategory}: resembles "${name}". Distinct traits: ${traitsList.join(', ')}. Context notes: ${manualNotes.trim()}`;
+
+      const resp = await aiRouter.askNaturalist(query);
+
+      if (resp.notFound) {
+        setManualResult({
+          id: crypto.randomUUID(),
+          predictedLabel: 'Specimen Not Found / Unrecognized Observation',
+          confidence: 0,
+          category: 'other',
+          characteristics: [],
+          natureFacts: [],
+          source: 'manual',
+          modelName: 'WildSense Field Trait Matcher',
+          warning: 'AI could not correlate these traits with a known living outdoor organism.',
+          createdAt: new Date(),
+          notFound: true,
+          error: resp.error || `Could not find any known wild organism matching "${name}".`,
+          apiNotice: resp.apiNotice,
+        });
+      } else {
+        setManualResult({
+          id: crypto.randomUUID(),
+          predictedLabel: resp.suggestedName || name,
+          confidence: resp.confidence ?? 0.92,
+          category: resp.category || manualCategory,
+          characteristics: resp.characteristics.length > 0 ? resp.characteristics : (traitsList.length > 0 ? traitsList : ['Visual field characteristics']),
+          natureFacts: resp.natureFacts && resp.natureFacts.length > 0 ? resp.natureFacts : [resp.ecologicalContext],
+          source: 'manual',
+          modelName: resp.source === 'gemini' ? 'Google Gemini Naturalist AI' : 'WildSense Field Trait Matcher',
+          warning: resp.safetyCaution || 'Field observation record. Maintain respect for wild flora and fauna.',
+          createdAt: new Date(),
+          notFound: false,
+          ecologicalContext: resp.ecologicalContext,
+          suggestedFollowUp: resp.suggestedFollowUp,
+          apiNotice: resp.apiNotice,
+        });
+      }
+    } catch (err) {
+      console.error('Manual trait matching failed:', err);
+    } finally {
+      setIsManualAnalyzing(false);
+    }
+  };
+
+  const handleSaveManualToJournal = async () => {
+    if (!manualResult) return;
+
+    await addJournalEntry({
+      id: crypto.randomUUID(),
+      name: manualResult.predictedLabel,
+      category: (manualResult.category as any) || 'plant',
+      notes: `${manualResult.characteristics.join('. ')}\n\nFacts: ${manualResult.natureFacts.join(' ')}\n\nField Notes: ${manualNotes}`,
+      dateTime: new Date(),
+      tags: ['field-trait-matcher', 'manual-observation'],
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
-    setResult(manualResult);
-    setImageUrl(null);
-    setAddedToJournal(false);
+    setManualSavedToJournal(true);
   };
+
 
   // Handlers for Ask Naturalist Mode
   const handleAskPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -846,76 +940,461 @@ export function IdentificationLab() {
         </div>
       )}
 
-      {/* TAB 3: MANUAL FIELD TRAIT MATCHER */}
+      {/* TAB 3: FIELD TRAIT MATCHER */}
       {activeTab === 'manual' && (
-        <div className="bg-white rounded-3xl border border-[#A8BDA0]/40 p-6 md:p-8 shadow-sm max-w-xl">
-          <form onSubmit={handleManualSubmit} className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold text-[#183D32] mb-1">
-                What does it resemble?
-              </label>
-              <input
-                type="text"
-                required
-                value={manualName}
-                onChange={(e) => setManualName(e.target.value)}
-                placeholder="e.g. Oak tree, blue-winged warbler, yellow bracket fungus"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#A8BDA0]/40 text-sm focus:outline-none focus:ring-2 focus:ring-[#183D32]"
-              />
+        <div className="space-y-6 animate-fade-in">
+          {/* Quick Trait Presets */}
+          <div className="bg-white rounded-3xl border border-[#A8BDA0]/40 p-5 shadow-sm">
+            <span className="text-[11px] font-bold text-[#6B756C] uppercase tracking-wider block mb-2.5">
+              Quick Observation Presets (Click to autofill traits):
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {[
+                {
+                  label: '🍂 Northern Red Oak',
+                  name: 'Northern Red Oak',
+                  cat: 'plant',
+                  traits: 'Alternate lobed leaves, sharp bristled tips, acorn seated in shallow woody cup',
+                  notes: 'Found in temperate deciduous canopy floor after rainfall',
+                },
+                {
+                  label: '🐦 American Robin',
+                  name: 'American Robin',
+                  cat: 'bird',
+                  traits: 'Brick-red orange breast plumage, dark charcoal head, alert upright stance, yellow bill',
+                  notes: 'Foraging for earthworms on open park lawn',
+                },
+                {
+                  label: '🍄 Shelf Polypore',
+                  name: 'Bracket Fungus / Shelf Polypore',
+                  cat: 'fungus',
+                  traits: 'Semicircular woody shelves attached to tree trunk, microscopic pores under cap',
+                  notes: 'Sprouting laterally from a decaying fallen oak log',
+                },
+                {
+                  label: '🌿 Woodland Fern',
+                  name: 'Woodland Fern',
+                  cat: 'plant',
+                  traits: 'Dissected feathery fronds, unrolling fiddleheads, spore-bearing sori dots under leaflets',
+                  notes: 'Dense moist shade along a shaded creek bank',
+                },
+                {
+                  label: '⚠️ Poison Ivy',
+                  name: 'Eastern Poison Ivy',
+                  cat: 'plant',
+                  traits: 'Compound leaves of three, oily sheen, trailing ground vine with off-white berries',
+                  notes: 'Growing on trail edge border — leaves of three let it be',
+                },
+              ].map((preset, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => {
+                    setManualName(preset.name);
+                    setManualCategory(preset.cat);
+                    setManualFeature(preset.traits);
+                    setManualNotes(preset.notes);
+                    setManualResult(null);
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-xl bg-[#F7F5EC] border border-[#A8BDA0]/40 text-[#183D32] hover:bg-[#183D32] hover:text-white transition-all font-medium"
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Main 2-Column Interface */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Left Column: Trait Input Form */}
+            <div className="lg:col-span-7 bg-white rounded-3xl border border-[#A8BDA0]/40 p-6 md:p-8 shadow-sm space-y-6">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#7BA7BC]/15 text-[#2C5E7A] mb-2">
+                  <Compass className="w-3.5 h-3.5" />
+                  Taxonomic Morphological Keying
+                </span>
+                <h3 className="text-xl font-serif font-bold text-[#102B24]">
+                  Record Visible Field Characteristics
+                </h3>
+                <p className="text-xs text-[#5C4A3A] mt-1">
+                  Examine structural attributes like leaf margins, feather patterns, spore structures, or footprints.
+                </p>
+              </div>
+
+              <form onSubmit={handleManualSubmit} className="space-y-5">
+                {/* Organism Name */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold text-[#183D32] uppercase tracking-wider">
+                    Observed Specimen / Working Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={manualName}
+                    onChange={(e) => setManualName(e.target.value)}
+                    placeholder="e.g. Red oak tree, rust-breasted bird, yellow bracket fungus"
+                    className="w-full px-4 py-3 rounded-2xl border border-[#A8BDA0]/40 text-sm text-[#102B24] placeholder-[#6B756C]/60 bg-[#FDFCF8] focus:outline-none focus:ring-2 focus:ring-[#183D32]"
+                  />
+                </div>
+
+                {/* Category Pill Selector */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-[#183D32] uppercase tracking-wider">
+                    Biological Kingdom / Group
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {[
+                      { id: 'plant', label: '🌿 Flora & Trees' },
+                      { id: 'bird', label: '🐦 Birds & Plumage' },
+                      { id: 'insect', label: '🐛 Insects & Spiders' },
+                      { id: 'fungus', label: '🍄 Fungi & Lichens' },
+                      { id: 'mammal', label: '🐾 Tracks & Mammals' },
+                    ].map((cat) => (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setManualCategory(cat.id)}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left flex items-center gap-1.5 ${
+                          manualCategory === cat.id
+                            ? 'bg-[#183D32] text-white border-[#183D32] shadow-xs'
+                            : 'bg-[#F7F5EC] text-[#5C4A3A] border-[#A8BDA0]/30 hover:border-[#183D32]'
+                        }`}
+                      >
+                        <span>{cat.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Distinct Features Input + Trait Chips */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-xs font-bold text-[#183D32] uppercase tracking-wider">
+                      Distinct Morphological Traits
+                    </label>
+                    <span className="text-[11px] text-[#6B756C]">Comma-separated</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={manualFeature}
+                    onChange={(e) => setManualFeature(e.target.value)}
+                    placeholder="e.g. serrated leaf margins, acorn cups, orange breast, woody shelf"
+                    className="w-full px-4 py-3 rounded-2xl border border-[#A8BDA0]/40 text-sm text-[#102B24] placeholder-[#6B756C]/60 bg-[#FDFCF8] focus:outline-none focus:ring-2 focus:ring-[#183D32]"
+                  />
+
+                  {/* Quick-add chips */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    <span className="text-[10px] text-[#6B756C] font-semibold self-center mr-1">Quick Add:</span>
+                    {[
+                      'Lobed leaves', 'Acorn cups', 'Orange breast', 'Pollen baskets', 
+                      'Woody bracket', 'Gills under cap', 'Parallel veins', 'Five toes & claws'
+                    ].map((trait, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          const current = manualFeature.trim();
+                          setManualFeature(current ? `${current}, ${trait}` : trait);
+                        }}
+                        className="text-[10px] px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-[#A8BDA0]/30 text-[#183D32] border border-stone-200 transition-colors"
+                      >
+                        +{trait}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Context Notes */}
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-bold text-[#183D32] uppercase tracking-wider">
+                    Habitat & Environmental Context
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={manualNotes}
+                    onChange={(e) => setManualNotes(e.target.value)}
+                    placeholder="e.g. Found growing directly on living bark 4 feet high in deep shade; observed early morning after rain."
+                    className="w-full p-4 rounded-2xl border border-[#A8BDA0]/40 text-sm text-[#102B24] placeholder-[#6B756C]/60 bg-[#FDFCF8] focus:outline-none focus:ring-2 focus:ring-[#183D32]"
+                  />
+                </div>
+
+                <div className="pt-2 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setManualName('');
+                      setManualFeature('');
+                      setManualNotes('');
+                      setManualResult(null);
+                    }}
+                    className="text-xs text-[#6B756C] hover:text-[#102B24] font-medium"
+                  >
+                    Clear Form
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={isManualAnalyzing || !manualName.trim()}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-[#183D32] text-white hover:bg-[#102B24] active:scale-95 transition-all shadow-md disabled:opacity-50"
+                  >
+                    {isManualAnalyzing ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        Evaluating Field Traits...
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="w-4 h-4 text-[#A8BDA0]" />
+                        Analyze Field Attributes
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-[#183D32] mb-1">
-                Domain / Category
-              </label>
-              <select
-                value={manualCategory}
-                onChange={(e) => setManualCategory(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#A8BDA0]/40 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#183D32]"
-              >
-                <option value="plant">🌿 Plant / Flora / Tree</option>
-                <option value="bird">🐦 Bird / Avian</option>
-                <option value="insect">🐛 Insect / Invertebrate</option>
-                <option value="fungus">🍄 Fungi / Lichen</option>
-                <option value="mammal">🐾 Mammal / Animal Tracks</option>
-              </select>
-            </div>
+            {/* Right Column: Field Naturalist Guide */}
+            <div className="lg:col-span-5 space-y-5">
+              <div className="bg-[#F7F5EC] rounded-3xl border border-[#A8BDA0]/40 p-6 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#183D32]">
+                  <BookOpen className="w-4 h-4 text-[#4A6741]" />
+                  Naturalist Field Checklist
+                </div>
+                <p className="text-xs text-[#5C4A3A] leading-relaxed">
+                  Key out unknown organisms on the trail by checking these 4 fundamental diagnostic criteria:
+                </p>
 
-            <div>
-              <label className="block text-xs font-semibold text-[#183D32] mb-1">
-                Distinct Features (comma separated)
-              </label>
-              <input
-                type="text"
-                value={manualFeature}
-                onChange={(e) => setManualFeature(e.target.value)}
-                placeholder="e.g. serrated leaf edges, yellow crest, bark with diamond fissures"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#A8BDA0]/40 text-sm focus:outline-none focus:ring-2 focus:ring-[#183D32]"
-              />
-            </div>
+                <div className="space-y-3 pt-1">
+                  <div className="p-3 bg-white rounded-2xl border border-[#A8BDA0]/30 text-xs">
+                    <strong className="block text-[#102B24] font-semibold mb-0.5">1. Leaf Margins & Venation</strong>
+                    <span className="text-[#5C4A3A]">
+                      Are margins smooth (entire), toothed (serrate), or lobed? Are veins pinnate or palmate?
+                    </span>
+                  </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-[#183D32] mb-1">
-                Field Context & Notes
-              </label>
-              <textarea
-                rows={3}
-                value={manualNotes}
-                onChange={(e) => setManualNotes(e.target.value)}
-                placeholder="What time of day? Was it under direct sun? How did it behave?"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#A8BDA0]/40 text-sm focus:outline-none focus:ring-2 focus:ring-[#183D32]"
-              />
-            </div>
+                  <div className="p-3 bg-white rounded-2xl border border-[#A8BDA0]/30 text-xs">
+                    <strong className="block text-[#102B24] font-semibold mb-0.5">2. Avian Beak Morphology</strong>
+                    <span className="text-[#5C4A3A]">
+                      Heavy conical beaks crack seeds; slender bills probe insects; hooked bills tear meat.
+                    </span>
+                  </div>
 
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-[#183D32] text-[#F7F5EC] hover:bg-[#102B24] transition-all shadow-md"
-            >
-              Analyze Field Attributes
-            </button>
-          </form>
+                  <div className="p-3 bg-white rounded-2xl border border-[#A8BDA0]/30 text-xs">
+                    <strong className="block text-[#102B24] font-semibold mb-0.5">3. Fungal Spore Surface</strong>
+                    <span className="text-[#5C4A3A]">
+                      Check under cap: bladed gills, spongy pores, or smooth brackets attached to wood?
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-white rounded-2xl border border-[#A8BDA0]/30 text-xs">
+                    <strong className="block text-[#102B24] font-semibold mb-0.5">4. Substrate & Moisture</strong>
+                    <span className="text-[#5C4A3A]">
+                      Living bark, forest leaf litter, sandy creek margin, or sunlit meadow turf?
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2.5">
+                <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <div className="leading-relaxed">
+                  <strong>Leave No Trace Principle:</strong> When examining traits, avoid tearing live leaves, picking wild mushrooms, or touching wild animals.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Loading Indicator */}
+          {isManualAnalyzing && (
+            <div className="bg-white rounded-3xl border border-[#A8BDA0]/40 p-8 text-center space-y-3 shadow-sm animate-fade-in">
+              <RefreshCw className="w-8 h-8 text-[#4A6741] animate-spin mx-auto" />
+              <h4 className="text-base font-serif font-bold text-[#102B24]">
+                Cross-Referencing Field Keys & Taxonomy...
+              </h4>
+              <p className="text-xs text-[#5C4A3A]">
+                Evaluating diagnostic traits against botanical and zoological database records.
+              </p>
+            </div>
+          )}
+
+          {/* Result Section: Shown when manual analysis completes */}
+          {manualResult && !isManualAnalyzing && (
+            manualResult.notFound ? (
+              <div className="bg-white rounded-3xl border border-rose-300 overflow-hidden shadow-lg animate-fade-in">
+                <div className="p-6 bg-gradient-to-r from-rose-900 via-rose-800 to-amber-950 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center shrink-0 border border-white/20">
+                      <SearchX className="w-6 h-6 text-rose-200" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 text-xs text-rose-200 font-semibold mb-1">
+                        <AlertTriangle className="w-4 h-4 text-amber-300" />
+                        <span>{manualResult.modelName || 'WildSense Field Trait Engine'}</span>
+                        {manualResult.apiNotice && (
+                          <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white">Local Engine Active</span>
+                        )}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
+                        {manualResult.predictedLabel}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/20 text-left sm:text-right shrink-0">
+                    <span className="text-[10px] text-rose-200 uppercase font-bold block">Status</span>
+                    <span className="text-xs font-mono font-bold text-rose-100">
+                      Traits Unrecognized
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 md:p-8 space-y-6">
+                  {manualResult.apiNotice && (
+                    <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center gap-2.5">
+                      <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                      <span>{manualResult.apiNotice}</span>
+                    </div>
+                  )}
+
+                  <div className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-1.5">
+                      <AlertCircle className="w-4 h-4 text-rose-600" />
+                      Trait Analysis Result
+                    </h4>
+                    <p className="text-sm text-[#102B24] leading-relaxed">
+                      {manualResult.error || manualResult.warning || 'Could not find any known wild organism matching these traits.'}
+                    </p>
+                  </div>
+
+                  <div className="bg-[#F7F5EC] p-5 rounded-2xl border border-[#A8BDA0]/40 space-y-3">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#183D32] flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-[#C87956]" />
+                      Tips for Keying Out Specimens:
+                    </h4>
+                    <ul className="text-xs text-[#5C4A3A] space-y-1.5 list-disc list-inside">
+                      <li>Use recognizable nature terms (e.g. "oak tree", "robin", "bracket mushroom", "fern").</li>
+                      <li>Include distinct morphological adjectives (e.g. "lobed leaves", "fuzzy bristles", "yellow breast").</li>
+                      <li>Try selecting one of the Quick Presets above to see an example of accurate trait keying.</li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-end">
+                    <button
+                      type="button"
+                      onClick={() => setManualResult(null)}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#183D32] text-white hover:bg-[#102B24] transition-all"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      Adjust Field Traits
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-3xl border border-[#A8BDA0]/40 overflow-hidden shadow-lg animate-fade-in">
+                <div className="p-6 bg-gradient-to-r from-[#183D32] to-[#102B24] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-xs text-[#A8BDA0] font-semibold mb-1">
+                      <ShieldCheck className="w-4 h-4 text-[#D4956B]" />
+                      <span>{manualResult.modelName || 'WildSense Field Trait Matcher'}</span>
+                      {manualResult.apiNotice && (
+                        <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full text-white ml-2">Local Engine</span>
+                      )}
+                    </div>
+                    <h3 className="text-2xl font-serif font-bold text-[#F7F5EC]">
+                      {manualResult.predictedLabel}
+                    </h3>
+                  </div>
+
+                  {manualResult.confidence !== null && (
+                    <div className="bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/20 text-right">
+                      <span className="text-[10px] text-[#A8BDA0] uppercase font-bold block">Trait Correlation</span>
+                      <span className="text-base font-mono font-bold text-white">
+                        {Math.round(manualResult.confidence * 100)}%
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-6 md:p-8 space-y-6">
+                  {manualResult.apiNotice && (
+                    <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center gap-2.5">
+                      <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                      <span>{manualResult.apiNotice}</span>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {/* Key Identifying Traits */}
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#183D32] flex items-center gap-1.5">
+                        <Info className="w-3.5 h-3.5 text-[#4A6741]" />
+                        Key Correlated Traits
+                      </h4>
+                      <ul className="space-y-1.5">
+                        {manualResult.characteristics.map((char, i) => (
+                          <li key={i} className="text-xs text-[#5C4A3A] flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#4A6741] mt-1.5 shrink-0" />
+                            <span>{char}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Ecological Context */}
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#183D32] flex items-center gap-1.5">
+                        <Leaf className="w-3.5 h-3.5 text-[#7BA7BC]" />
+                        Ecological Role & Habitat
+                      </h4>
+                      <p className="text-xs text-[#5C4A3A] leading-relaxed bg-[#F7F5EC] p-3 rounded-xl border border-[#A8BDA0]/30 font-medium">
+                        {manualResult.ecologicalContext || manualResult.natureFacts[0] || 'Plays a vital role in local biodiversity.'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Safety Warning */}
+                  {manualResult.warning && (
+                    <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                      <span>{manualResult.warning}</span>
+                    </div>
+                  )}
+
+                  {/* Save to Journal */}
+                  <div className="pt-2 flex items-center justify-between border-t border-[#A8BDA0]/20">
+                    <span className="text-xs text-[#6B756C]">
+                      Add this observation to your permanent field journal:
+                    </span>
+                    <button
+                      onClick={handleSaveManualToJournal}
+                      disabled={manualSavedToJournal}
+                      className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md ${
+                        manualSavedToJournal
+                          ? 'bg-emerald-700 text-white cursor-default'
+                          : 'bg-[#183D32] text-white hover:bg-[#102B24] active:scale-95'
+                      }`}
+                    >
+                      {manualSavedToJournal ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          Logged in Field Journal!
+                        </>
+                      ) : (
+                        <>
+                          <BookOpen className="w-4 h-4" />
+                          Save Observation to Journal
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
+          )}
         </div>
       )}
     </div>
   );
 }
+
